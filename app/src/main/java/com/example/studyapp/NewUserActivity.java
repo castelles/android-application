@@ -17,10 +17,10 @@ public class NewUserActivity extends AppCompatActivity {
     }
 
     public void registerUser(View view) {
-        EditText inputLogin = (EditText) findViewById(R.id.regUsername);
-        EditText inputName = (EditText) findViewById(R.id.regName);
-        EditText inputPass = (EditText) findViewById(R.id.regPass);
-        RadioButton radioEst = (RadioButton) findViewById(R.id.estRadio);
+        EditText inputLogin = findViewById(R.id.regUsername);
+        EditText inputName = findViewById(R.id.regName);
+        EditText inputPass = findViewById(R.id.regPass);
+        RadioButton radioEst = findViewById(R.id.estRadio);
 
         User user = new User(inputLogin.getText().toString(),
                 inputName.getText().toString(),
@@ -31,10 +31,27 @@ public class NewUserActivity extends AppCompatActivity {
 
         if ( userDAO.addUSer(user) ) {
             Toast.makeText(this, "Usuário Criado!", Toast.LENGTH_SHORT).show();
-            finish();
+            this.finish();
         }
         else {
             Toast.makeText(this,"Erro ao cadastrar!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void checkTypeEst(View view) {
+        RadioButton admBtt = findViewById(R.id.admBtt);
+        RadioButton estBtt = findViewById(R.id.radEst);
+
+        estBtt.setChecked(true);
+        admBtt.setChecked(false);
+    }
+
+    public void checkTypeAdm(View view) {
+        RadioButton estBtt = findViewById(R.id.radEst);
+        RadioButton admBtt = findViewById(R.id.admBtt);
+
+
+        admBtt.setChecked(true);
+        estBtt.setChecked(false);
     }
 }
