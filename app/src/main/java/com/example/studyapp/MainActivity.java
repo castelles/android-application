@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,14 +31,31 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
                 alert.setMessage("Login Transire").setNeutralButton("Tabom amor",null).show();
                 return true;
+            case R.id.newUser:
+                Intent intent = new Intent(this, NewUserActivity.class);
+                startActivity(intent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    public void entrarClicado(View view) {
+    public void loginClick(View view) {
         Toast.makeText(this, "Olá!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this,WelcomeActivity.class);
-        startActivity(intent);
+
+        EditText inputLogin = (EditText) findViewById(R.id.userHint);
+        EditText inputPass = (EditText) findViewById(R.id.passHint);
+
+        UserDAO userDAO = new UserDAO(this);
+        User user = userDAO.getUser(inputLogin.getText().toString(),inputPass.getText().toString());
+
+        if (user != null) {
+            intent.putExtra("user", user);
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(this,"User or password is wrong",Toast.LENGTH_SHORT).show();
+        }
     }
 }

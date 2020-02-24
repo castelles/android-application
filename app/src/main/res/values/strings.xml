@@ -9,5 +9,8 @@
     <string name="userHint">username</string>
     <string name="passHint">pass</string>
     <string name="aboutMenu">sobre</string>
+    <string name="newUser">Novo Usuário</string>
     <string name="welcome">Bem-vindo!</string>
+    <string name="register">Cadastrar Novo Usuário</string>
+    <string name="registerBtt">Cadastrar</string>
 </resources>
