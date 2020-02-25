@@ -11,13 +11,13 @@ public class UserDAO
     private SQLiteDatabase itbamDB;
 
     public UserDAO(Context context) {
-        this.itbamDB = (new Database(context).getWritableDatabase());
+        this.itbamDB = (new Database(context)).getWritableDatabase();
     }
 
     public User getUser(String login, String pass) {
         User user = null;
 
-        String sqlQuery = "SELECT * FROM Usuarios WHERE login='" + login +
+        String sqlQuery = "SELECT * FROM Users WHERE login='" + login +
                 "' AND pass='" + pass + "'";
 
         Cursor cursor = this.itbamDB.rawQuery(sqlQuery,null);

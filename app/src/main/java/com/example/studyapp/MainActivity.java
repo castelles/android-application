@@ -3,6 +3,7 @@ package com.example.studyapp;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,14 +42,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loginClick(View view) {
-        Toast.makeText(this, "Olá!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Hi there!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this,WelcomeActivity.class);
 
-        EditText inputLogin = (EditText) findViewById(R.id.userHint);
-        EditText inputPass = (EditText) findViewById(R.id.passHint);
+        EditText inputLogin = findViewById(R.id.userHint);
+        EditText inputPass = findViewById(R.id.passHint);
+//        RadioButton estRadio = findViewById(R.id.estRadio);
 
         UserDAO userDAO = new UserDAO(this);
+
         User user = userDAO.getUser(inputLogin.getText().toString(),inputPass.getText().toString());
+//        Log.i("Info",user.getLogin());
 
         if (user != null) {
             intent.putExtra("user", user);

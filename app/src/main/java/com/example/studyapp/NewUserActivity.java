@@ -20,7 +20,7 @@ public class NewUserActivity extends AppCompatActivity {
         EditText inputLogin = findViewById(R.id.regUsername);
         EditText inputName = findViewById(R.id.regName);
         EditText inputPass = findViewById(R.id.regPass);
-        RadioButton radioEst = findViewById(R.id.estRadio);
+        RadioButton radioEst = findViewById(R.id.radEst);
 
         User user = new User(inputLogin.getText().toString(),
                 inputName.getText().toString(),
@@ -31,7 +31,7 @@ public class NewUserActivity extends AppCompatActivity {
 
         if ( userDAO.addUSer(user) ) {
             Toast.makeText(this, "Usuário Criado!", Toast.LENGTH_SHORT).show();
-            this.finish();
+            finish();
         }
         else {
             Toast.makeText(this,"Erro ao cadastrar!", Toast.LENGTH_SHORT).show();

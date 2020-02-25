@@ -9,8 +9,9 @@ import androidx.annotation.Nullable;
 public class Database extends SQLiteOpenHelper
 {
     public static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "Transire.db";
+    private static final String DATABASE_NAME = "transiredb";
     private static final String SQL_CREATE_TABLES = "CREATE TABLE Users(login TEXT PRIMARY KEY, name TEXT, pass TEXT, type INT)";
+    private static final String SQL_POPULATE_DATABASE =  "INSERT INTO Users VALUES ('caio', 'Caio', '123', 2)";
     private static final String SQL_DELETE_TABLES = "DROP TABLE IF EXISTS Users";
 
     public Database(@Nullable Context context) {
@@ -20,6 +21,7 @@ public class Database extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_TABLES);
+        db.execSQL(SQL_POPULATE_DATABASE);
     }
 
     @Override
