@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Demo App</string>
+    <string name="hello">Hello Caio!</string>
+    <string name="great">My Great App</string>
+    <string name="doBtt">SWITCH</string>
+    <string name="userField">Username</string>
+    <string name="passField">Password</string>
+    <string name="hintEditor">Enter you name...</string>
+</resources>
+
