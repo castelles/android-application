@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Connect Three</string>
+    <string name="newGameBtt">New Game</string>
+    <string name="winnerText"></string>
+</resources>

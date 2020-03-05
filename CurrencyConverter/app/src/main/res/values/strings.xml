@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Currency Converter</string>
+    <string name="currHint">Enter the amount in Brazillian Reais...</string>
+    <string name="convertBtt">Convert</string>
 </resources>
