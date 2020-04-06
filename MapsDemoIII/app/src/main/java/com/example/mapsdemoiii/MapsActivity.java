@@ -1,4 +1,4 @@
-package com.caiotelles.mapsdemoii;
+package com.example.mapsdemoiii;
 
 import androidx.fragment.app.FragmentActivity;
 
