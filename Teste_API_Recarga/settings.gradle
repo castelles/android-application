@@ -1,0 +1,2 @@
+rootProject.name='Teste_API_Recarga'
+include ':app'
