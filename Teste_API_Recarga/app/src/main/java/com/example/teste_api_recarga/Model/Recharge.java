@@ -15,11 +15,4 @@ public class Recharge {
         this.planId = planId;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public int getPlanId() {
-        return planId;
-    }
 }

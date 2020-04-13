@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.teste_api_recarga.MainActivity;
 import com.example.teste_api_recarga.Model.Plan;
+import com.example.teste_api_recarga.PlansListActivity;
 
 import org.json.JSONObject;
 
@@ -26,9 +27,10 @@ public class GetPlansCallback implements Callback<List<Plan>>
     public void onResponse(Call<List<Plan>> call, Response<List<Plan>> response) {
         Log.i("Teste R",response.toString());
         if (response.isSuccessful()) {
-            Log.i("Teste IF",response.toString());
+            Log.i("Teste IF",Integer.toString(response.code()));
             List<Plan> list= response.body();
             Log.i("Teste Plan",response.body().get(3).getOperadora());
+            PlansListActivity.setPlanslist(list);
         }
     }
 
