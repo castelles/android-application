@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.menuPlans) {
+            //overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
             startActivity(intent);
         }
 

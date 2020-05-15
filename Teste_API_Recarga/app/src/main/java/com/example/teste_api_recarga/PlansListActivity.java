@@ -38,12 +38,16 @@ public class PlansListActivity extends AppCompatActivity {
 
     public ArrayList<String> getOp() {
         ArrayList<String> operadorasEPlanos = new ArrayList<>();
-        for(int i = 0; i < planslist.size(); i++){
-            Log.i("Teste aqui",planslist.get(i).getOperadora());
-            String current = "";
-            current = planslist.get(i).getOperadora() + " - " + planslist.get(i).getPlanId();
-            operadorasEPlanos.add(current);
+        if (planslist != null) {
+            for (int i = 0; i < planslist.size(); i++) {
+                Log.i("Teste aqui", planslist.get(i).getOperadora());
+                String current = "";
+                current = planslist.get(i).getOperadora() + " - " + planslist.get(i).getPlanId();
+                operadorasEPlanos.add(current);
+            }
+            return operadorasEPlanos;
         }
+        operadorasEPlanos.add("Error!");
         return operadorasEPlanos;
     }
 

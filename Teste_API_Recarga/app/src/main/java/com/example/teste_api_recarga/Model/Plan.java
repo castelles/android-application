@@ -13,6 +13,9 @@ public class Plan {
     @SerializedName("plan")
     private int planId;
 
+    @SerializedName("id")
+    private int id;
+
     public Plan(String operadora, int planId) {
         this.operadora = operadora;
         this.planId = planId;
