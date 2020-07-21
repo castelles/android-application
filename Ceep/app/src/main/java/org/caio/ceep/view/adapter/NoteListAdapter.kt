@@ -1,4 +1,4 @@
-package org.caio.ceep
+package org.caio.ceep.view.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.note_item.view.*
+import org.caio.ceep.model.Note
+import org.caio.ceep.R
 
 class NoteListAdapter(private val notes: List<Note>, private val context: Context) :
     RecyclerView.Adapter<NoteListAdapter.ViewHolder>() {
