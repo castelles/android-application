@@ -2,7 +2,7 @@ package org.caio.ceep.webservice
 
 import org.caio.ceep.model.Note
 
-interface NoteResponse {
+interface NoteResponse<T> {
 
-    fun success(notes: List<Note>)
+    fun success(response: T)
 }
