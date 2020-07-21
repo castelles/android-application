@@ -2,7 +2,7 @@ package org.caio.ceep.webservice
 
 import org.caio.ceep.model.Note
 
-interface NoteResponse<T> {
+interface CallbackResponse<T> {
 
     fun success(response: T)
 }

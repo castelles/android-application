@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -16,13 +15,14 @@ import kotlinx.android.synthetic.main.form_note.view.*
 import org.caio.ceep.model.Note
 import org.caio.ceep.view.adapter.NoteListAdapter
 import org.caio.ceep.R
-import org.caio.ceep.webservice.NoteResponse
+import org.caio.ceep.webservice.CallbackResponse
 import org.caio.ceep.webservice.NoteWebClient
 
 
 class MainActivity : AppCompatActivity() {
 
     private var recyclerVew : RecyclerView? = null
+    private val notes: MutableList<Note> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,14 +39,15 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        NoteWebClient(applicationContext).list(object: NoteResponse {
+        NoteWebClient(applicationContext).list(object: CallbackResponse<List<Note>> {
             override fun success(notes: List<Note>) {
-                recyclerConfig(notes)
+                this@MainActivity.notes.addAll(notes)
+                recyclerConfig()
             }
         })
     }
 
-    private fun recyclerConfig(notes: List<Note>) {
+    private fun recyclerConfig() {
         recyclerVew = listNotesRecycler
         recyclerVew?.let {
             recyclerVew!!.adapter =
@@ -68,7 +69,13 @@ class MainActivity : AppCompatActivity() {
                     override fun onClick(dialog: DialogInterface?, which: Int) {
                         val title = createdView.form_note_title.text.toString()
                         val description = createdView.form_note_description.text.toString()
-                        val note = Note(title, description)
+                        NoteWebClient(this@MainActivity).
+                            insert(Note(title, description), object: CallbackResponse<Note> {
+                                override fun success(response: Note) {
+                                    this@MainActivity.notes.add(response)
+                                    recyclerConfig()
+                                }
+                            })
                     }
                 }).
                 show()
