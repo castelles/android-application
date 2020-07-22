@@ -8,44 +8,51 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class NoteWebClient(_context: Context) {
+class NoteWebClient(private val context: Context) {
 
-    val context = _context
-
-    fun list(callbackResponse: CallbackResponse<List<Note>>) {
+    fun list(success: (notes: List<Note>) -> Unit,
+            failure: (throwable: Throwable) -> Unit) {
         val listingCall = ConectionInitializer().noteService().list()
-        listingCall.enqueue(object: Callback<List<Note>?> {
-            override fun onFailure(call: Call<List<Note>?>, t: Throwable) {
-                Toast.makeText(context,
-                    "Não foi possível listar suas notas",
-                    Toast.LENGTH_LONG).show()
-                Log.e("onFailure Error", t?.message)
+        listingCall.enqueue(callback( { response ->
+            Log.e("Listing Response", "listagem executada!")
+            response?.body()?.let {
+                success(it)
             }
-
-            override fun onResponse(call: Call<List<Note>?>, response: Response<List<Note>?>) {
-                response?.body()?.let {
-                    val notes: List<Note> = it
-                    callbackResponse.success(notes)
-                }
+        }, { throwable ->
+            throwable?.let {
+                failure(it)
             }
-        })
+        }))
     }
 
-    fun insert(note: Note, callbackResponse: CallbackResponse<Note>) {
-        val creationCall =  ConectionInitializer().noteService().insert(note)
-        creationCall.enqueue(object: Callback<Note?> {
-            override fun onFailure(call: Call<Note?>, t: Throwable) {
-                Toast.makeText(context,
-                    "Não foi possível listar suas notas",
-                    Toast.LENGTH_LONG).show()
-                Log.e("onFailure Error", t?.message)
+    fun insert(note: Note, success: (notes: Note) -> Unit,
+            failure: (throwable: Throwable) -> Unit) {
+        val creationCall = ConectionInitializer().noteService().insert(note)
+        creationCall.enqueue(callback( { response ->
+            Log.e("Created note", response?.body()?.title)
+            response?.body()?.let {
+                success(it)
             }
+        }, {throwable ->
+            throwable?.let {
+                failure(it)
+            }
+        }))
+    }
 
-            override fun onResponse(call: Call<Note?>, response: Response<Note?>) {
-                Log.d("Created note", response?.body()?.title)
-                callbackResponse.success(note)
+    fun alter(note: Note, success: (alteredNote: Note) -> Unit,
+              failure: (throwable: Throwable) -> Unit) {
+        val alterCall = ConectionInitializer().noteService().alter(note, note.id)
+        alterCall.enqueue(callback({response ->
+            Log.e("Altering a note", "done.")
+            response?.body()?.let {
+                success(it)
             }
-        })
+        }, {throwable ->
+            throwable?.let {
+                failure(it)
+            }
+        }))
     }
 
 }

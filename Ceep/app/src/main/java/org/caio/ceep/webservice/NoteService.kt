@@ -2,9 +2,7 @@ package org.caio.ceep.webservice
 
 import org.caio.ceep.model.Note
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface NoteService {
 
@@ -13,4 +11,7 @@ interface NoteService {
 
     @POST("notes")
     fun insert(@Body note: Note): Call<Note>
+
+    @PUT("notes/{id}")
+    fun alter(@Body note: Note, @Path("id") id: Int): Call<Note>
 }

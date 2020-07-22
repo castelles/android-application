@@ -9,7 +9,11 @@ import kotlinx.android.synthetic.main.note_item.view.*
 import org.caio.ceep.model.Note
 import org.caio.ceep.R
 
-class NoteListAdapter(private val notes: List<Note>, private val context: Context) :
+class NoteListAdapter(
+    private val notes: List<Note>,
+    private val context: Context,
+    private val onItemClickListener: (note: Note, position: Int) -> Unit
+) :
     RecyclerView.Adapter<NoteListAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -35,6 +39,9 @@ class NoteListAdapter(private val notes: List<Note>, private val context: Contex
         val note = notes[position]
         holder?.let {
             it.bindView(note)
+            it.itemView.setOnClickListener {
+                onItemClickListener(note, position)
+            }
         }
     }
 }
